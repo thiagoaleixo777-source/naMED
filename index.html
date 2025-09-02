@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>naMED - Projeto de Extensão sobre Angústias na Medicina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c6e9b;
+            --secondary: #204b69;
+            --accent: #4ca1af;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --text: #333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f2ff 0%, #f0f7ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.8rem;
+        }
+        
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .logo-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 70px 30px;
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(44, 110, 155, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(44, 110, 155, 0.4);
+        }
+        
+        .btn i {
+            margin-left: 10px;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            padding: 35px 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--accent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 110, 155, 0.2);
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .confidentiality-notice {
+            background: #e6f2ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .confidentiality-notice p {
+            text-align: left;
+            margin: 0;
+        }
+        
+        .thank-you {
+            text-align: center;
+            padding: 60px 30px;
+        }
+        
+        .thank-you-icon {
+            font-size: 5rem;
+            color: #4caf50;
+            margin-bottom: 30px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            background: var(--light);
+            border-radius: 12px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">⚕️</div>
+                    <div>
+                        <div class="logo-text">naMED</div>
+                        <div class="logo-subtitle">Núcleo de Apoio ao Estudante de Medicina</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#participate">Participar</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Projeto de Extensão: Angústias na Medicina</h1>
+            <p>Um espaço seguro para estudantes de medicina compartilharem suas experiências e desafios de forma anônima</p>
+            <button class="btn" onclick="scrollToForm()">Participar da Pesquisa <i class="fas fa-arrow-right"></i></button>
+        </section>
+
+        <section id="about" class="content-section">
+            <h2>Sobre o Projeto</h2>
+            <p>Este projeto de extensão tem como objetivo compreender as principais angústias e desafios enfrentados por estudantes de medicina ao longo de sua jornada acadêmica. Sua participação é voluntária, anônima e contribuirá para o desenvolvimento de melhores políticas de apoio estudantil.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤫</div>
+                    <h3>Totalmente Anônimo</h3>
+                    <p>Seus relatos são confidenciais e não identificáveis. Valorizamos sua privacidade acima de tudo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Foco na Solução</h3>
+                    <p>Os resultados serão usados para criar melhores políticas de apoio e suporte aos estudantes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Apoio Estudantil</h3>
+                    <p>Contribua para melhorar a experiência acadêmica de futuros estudantes de medicina.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="participate" class="content-section">
+            <h2>Participe da Pesquisa</h2>
+            <p>Selecione seu semestre e compartilhe conosco suas principais angústias e desafios como estudante de medicina. Sua contribuição é valiosa e ajudará a criar um ambiente acadêmico mais saudável e supportive.</p>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="semester">Em qual semestre você está?</label>
+                    <select id="semester">
+                        <option value="">Selecione seu semestre</option>
+                        <option value="1">1º Semestre</option>
+                        <option value="2">2º Semestre</option>
+                        <option value="3">3º Semestre</option>
+                        <option value="4">4º Semestre</option>
+                        <option value="5">5º Semestre</option>
+                        <option value="6">6º Semestre</option>
+                        <option value="7">7º Semestre</option>
+                        <option value="8">8º Semestre</option>
+                        <option value="9+">9º+ Semestre</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="anguish">Compartilhe sua principal angústia ou desafio:</label>
+                    <textarea id="anguish" placeholder="Descreva aqui sua experiência..."></textarea>
+                </div>
+                
+                <div class="confidentiality-notice">
+                    <p><strong>Lembrete:</strong> Sua participação é totalmente anônima. Todas as informações fornecidas serão utilizadas apenas para fins acadêmicos neste projeto de extensão. Você pode desistir a qualquer momento.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn" onclick="submitForm()">Enviar Resposta <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            
+            <div id="thank-you" style="display: none;">
+                <div class="thank-you">
+                    <div class="thank-you-icon">✓</div>
+                    <h2>Obrigado pela sua participação!</h2>
+                    <p>Seu relato foi registrado com sucesso e será de grande valor para nossa pesquisa.</p>
+                    <p>Os resultados desta pesquisa serão compilados e apresentados como parte do projeto de extensão.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <h3>naMED - Núcleo de Apoio ao Estudante de Medicina</h3>
+            <p>Projeto de Extensão Universitária</p>
+            
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Contato</a>
+            </div>
+            
+            <p>© 2023 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToForm() {
+            document.getElementById('participate').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function submitForm() {
+            const semester = document.getElementById('semester').value;
+            const anguish = document.getElementById('anguish').value;
+            
+            if (!semester || !anguish) {
+                alert('Por favor, selecione seu semestre e compartilhe sua angústia antes de enviar.');
+                return;
+            }
+            
+            // Simulação de envio dos dados
+            console.log('Dados coletados:');
+            console.log('Semestre:', semester);
+            console.log('Angústia:', anguish);
+            
+            // Em um ambiente real, aqui você enviaria os dados para um servidor
+            // fetch('URL_DO_SEU_SERVIDOR', { método POST, etc... })
+            
+            document.querySelector('.form-container').style.display = 'none';
+            document.getElementById('thank-you').style.display = 'block';
+            document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
